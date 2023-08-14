@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="/customers.css">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
     <div class="container">
-
+        <ul>
+            <li  th:each="investmentProduct, index : ${investmentProductList}">
+                <div class="item"><b>Name: </b><span th:text=" ${investmentProduct.getName()}"></span></div>
+                <div class="item"><b>Administration Rate: </b><span th:text=" ${investmentProduct.getStatus()}"></span></div>
+                <div class="item"><b>Term: </b><span th:text=" ${investmentProduct.getTerm()}"></span></div>
+                <div class="item"><b>Profitability Rate: </b><span th:text=" ${investmentProduct.getProfitabilityRate()}"></span></div>
+                <div class="item"><b>Status: </b><span th:text=" ${investmentProduct.getDestination()}"></span></div>
+                <div class="item"><b>Destination: </b><span th:text="${investmentProduct.getAdministrationTax()}"></span></div>
+            </li>
+        </ul>
     </div>
 </body>
 </html>

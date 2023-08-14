@@ -12,7 +12,7 @@ import lombok.Setter;
 public class InvestmentProductDTO {
     private String name;
     private String destination;
-    private String profitabilityRate;
+    private double profitabilityRate;
     private int term;
     private double administrationTax;
 }

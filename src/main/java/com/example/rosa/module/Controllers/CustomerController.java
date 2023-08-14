@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
+
 @Controller
-@RequestMapping("/customer")
 public class CustomerController {
     private final InvestmentProductService investmentProductService;
 
@@ -18,7 +20,7 @@ public class CustomerController {
         this.investmentProductService = investmentProductService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/customers")
     public String customersList(Model model){
         final var investmentProductList = investmentProductService.getAllCustomers();
         model.addAttribute("investmentProductList", investmentProductList);
@@ -26,7 +28,7 @@ public class CustomerController {
         return "customers";
     }
 
-    @GetMapping("/create")
+    @GetMapping("/customer/create")
     public String showForm(Model model){
         InvestmentProductDTO investimentProduct = new InvestmentProductDTO();
         model.addAttribute("investmentProduct", investimentProduct);
@@ -34,13 +36,13 @@ public class CustomerController {
         return "form";
     }
 
-    @PostMapping("/create")
-    public String createNewCustomer(@ModelAttribute(value = "customer") InvestmentProductDTO customer){
-        investmentProductService.createNewCustomer(customer);
-        return "redirect:/customers/";
+    @PostMapping("/customer/create")
+    public String createNewCustomer(@ModelAttribute(value = "investmentProduct") InvestmentProductDTO investmentProduct){
+        investmentProductService.createNewCustomer(investmentProduct);
+        return "redirect:/";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/customer/delete/{id}")
     public void deleteCustomer( @PathVariable String id){
         InvestimentProduct customer = investmentProductService.getCustomerById(id);
         investmentProductService.deleteCustomer(customer);

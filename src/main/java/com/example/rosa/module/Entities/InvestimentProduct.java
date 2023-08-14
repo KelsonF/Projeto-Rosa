@@ -2,26 +2,28 @@ package com.example.rosa.module.Entities;
 
 import com.example.rosa.module.Enums.InvestimentProductStatus;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
 import lombok.*;
+import java.util.UUID;
 
-@Getter
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "InvestmentProduct")
+@Table(name = "investment_product")
 public class InvestimentProduct {
 
     @Id
-    @NonNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     private String name;
+
     @Enumerated(EnumType.STRING)
     private InvestimentProductStatus status;
+
     private String destination;
-    private String profitabilityRate;
+    private double profitabilityRate;
     private int term;
     private double administrationTax;
 }

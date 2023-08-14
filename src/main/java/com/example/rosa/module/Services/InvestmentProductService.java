@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class InvestmentProductService {
@@ -19,12 +20,13 @@ public class InvestmentProductService {
 
     public void createNewCustomer(InvestmentProductDTO customerData){
         final var customer = new InvestimentProduct();
+        customer.setId(UUID.randomUUID().toString().replace("-", ""));
         customer.setName(customerData.getName());
         customer.setStatus(InvestimentProductStatus.AVAILABLE);
         customer.setDestination(customerData.getDestination());
         customer.setProfitabilityRate(customerData.getProfitabilityRate());
         customer.setTerm(customerData.getTerm());
-        customer.setAdministrationTax(customer.getAdministrationTax());
+        customer.setAdministrationTax(customerData.getAdministrationTax());
         customerRepository.save(customer);
     }
 
@@ -32,8 +34,8 @@ public class InvestmentProductService {
         return  customerRepository.findAll();
     }
 
-    public InvestimentProduct getCustomerById(String Id){
-        return customerRepository.getReferenceById(Id);
+    public InvestimentProduct getCustomerById(String id){
+        return customerRepository.getReferenceById(id);
     }
 
     public void deleteCustomer(InvestimentProduct customer){
