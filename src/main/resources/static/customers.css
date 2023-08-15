@@ -9,16 +9,20 @@ body {
     width: 100vw;
     overflow: hidden;
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #121212;
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: darkgray;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+b {
+    color: purple;
 }
 
 ul {
@@ -32,10 +36,6 @@ li {
     transition: 0.5s;
 }
 
-li:hover{
-  background-color: lightgray;
-}
-
 .item {
     margin-bottom: 10px;
 }
@@ -47,4 +47,10 @@ li:hover{
 
 .item span {
     font-weight: normal;
+    color: whitesmoke;
+}
+
+.delete-button {
+    padding: 2px;
+    width: 35%;
 }

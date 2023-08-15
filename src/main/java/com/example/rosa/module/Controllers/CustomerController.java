@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 
 @Controller
 public class CustomerController {
@@ -42,9 +40,11 @@ public class CustomerController {
         return "redirect:/";
     }
 
-    @DeleteMapping("/customer/delete/{id}")
-    public void deleteCustomer( @PathVariable String id){
+    @GetMapping("/customer/delete/{id}")
+    public String deleteCustomer( @PathVariable String id){
         InvestimentProduct customer = investmentProductService.getCustomerById(id);
         investmentProductService.deleteCustomer(customer);
+
+        return "redirect:/customers";
     }
 }
