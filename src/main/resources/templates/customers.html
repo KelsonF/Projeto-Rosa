@@ -6,24 +6,39 @@
     <title>Title</title>
 </head>
 <body>
-    <div class="container">
-        <ul>
-            <li  th:each="investmentProduct : ${investmentProductList}">
-                <div class="item"><b>Name: </b><span th:text=" ${investmentProduct.getName()}"></span></div>
-                <div class="item"><b>Administration Rate: </b><span th:text=" ${investmentProduct.getStatus()}"></span></div>
-                <div class="item"><b>Term: </b><span th:text=" ${investmentProduct.getTerm()}"></span></div>
-                <div class="item"><b>Profitability Rate: </b><span th:text=" ${investmentProduct.getProfitabilityRate()}"></span></div>
-                <div class="item"><b>Status: </b><span th:text=" ${investmentProduct.getDestination()}"></span></div>
-                <div class="item"><b>Destination: </b><span th:text="${investmentProduct.getAdministrationTax()}"></span></div>
-                <div class="delete-button">
-                    <form th:action="@{/customer/delete/{id}(id=${investmentProduct.getId()})}" th:method="get">
-                        <button type="submit" class="delete-button">
+    <div class="wrapper" >
+        <div class="container" th:each="investmentProduct : ${investmentProductList}">
+            <div class="item"><b>Name: </b><span th:text=" ${investmentProduct.getName()}"></span></div>
+            <div class="item"><b>Destination: </b><span th:text="${investmentProduct.getDestination()}"></span></div>
+            <div class="item"><b>Status: </b><span th:text=" ${investmentProduct.getStatus()}"></span></div>
+            <div class="item"><b>Term: </b><span th:text=" ${investmentProduct.getTerm()}"></span></div>
+            <div class="item"><b>Administration Tax: </b><span th:text=" ${investmentProduct.getAdministrationTax()}"></span></div>
+            <div class="item"><b>Profitability Rate: </b><span th:text=" ${investmentProduct.getProfitabilityRate()}"></span></div>
+            <div class="item"><b>Due Date: </b><span th:text="${investmentProduct.getExpired()}"></span></div>
+            <div class="buttons-container">
+                <a th:href="@{/customers/{id}(id=${investmentProduct.getId()})}">
+                    <button class="delete-button">
+                        <span>
+                            DETAILS
+                        </span>
+                    </button>
+                </a>
+                <form th:action="@{/customer/delete/{id}(id=${investmentProduct.getId()})}" th:method="delete">
+                    <button class="detail-button">
+                        <span>
                             DELETE
-                        </button>
-                    </form>
-                </div>
-            </li>
-        </ul>
+                        </span>
+                    </button>
+                </form>
+                <a th:href="@{/customers/updateStatus/{id}(id=${investmentProduct.getId()})}">
+                    <button class="changeStatus-button">
+                        <span>
+                            CHANGE STATUS
+                        </span>
+                    </button>
+                </a>
+            </div>
+        </div>
     </div>
 </body>
 </html>

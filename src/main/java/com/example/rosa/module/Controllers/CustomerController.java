@@ -4,12 +4,12 @@ import com.example.rosa.module.DTOs.InvestmentProductDTO;
 import com.example.rosa.module.Entities.InvestimentProduct;
 import com.example.rosa.module.Services.InvestmentProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
-@Controller
+@RestController
 public class CustomerController {
     private final InvestmentProductService investmentProductService;
 
@@ -19,11 +19,13 @@ public class CustomerController {
     }
 
     @GetMapping("/customers")
-    public String customersList(Model model){
-        final var investmentProductList = investmentProductService.getAllCustomers();
-        model.addAttribute("investmentProductList", investmentProductList);
+    public List<InvestimentProduct> customersList(){
+        return investmentProductService.getAllCustomers();
+    }
 
-        return "customers";
+    @GetMapping("/customers/{id}")
+    public InvestimentProduct getCustomById(@PathVariable String id){
+        return investmentProductService.getCustomerById(id);
     }
 
     @GetMapping("/customer/create")
@@ -37,10 +39,18 @@ public class CustomerController {
     @PostMapping("/customer/create")
     public String createNewCustomer(@ModelAttribute(value = "investmentProduct") InvestmentProductDTO investmentProduct){
         investmentProductService.createNewCustomer(investmentProduct);
-        return "redirect:/";
+
+        return "redirect:/customers";
     }
 
-    @GetMapping("/customer/delete/{id}")
+    @GetMapping("/customers/updateStatus/{id}")
+    public String updateStatus(@PathVariable String id){
+        investmentProductService.changeProductStatus(id);
+
+        return "redirect:/customers";
+    }
+
+    @DeleteMapping("/customer/delete/{id}")
     public String deleteCustomer( @PathVariable String id){
         InvestimentProduct customer = investmentProductService.getCustomerById(id);
         investmentProductService.deleteCustomer(customer);

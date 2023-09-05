@@ -27,6 +27,7 @@ public class InvestmentProductService {
         customer.setProfitabilityRate(customerData.getProfitabilityRate());
         customer.setTerm(customerData.getTerm());
         customer.setAdministrationTax(customerData.getAdministrationTax());
+        customer.setExpired(customerData.getExpired());
         customerRepository.save(customer);
     }
 
@@ -37,6 +38,19 @@ public class InvestmentProductService {
     public InvestimentProduct getCustomerById(String id){
         return customerRepository.getReferenceById(id);
     }
+
+    public void changeProductStatus(String id){
+        InvestimentProduct investimentProduct = customerRepository.getReferenceById(id);
+
+        if (investimentProduct.getStatus() == InvestimentProductStatus.AVAILABLE) {
+            investimentProduct.setStatus(InvestimentProductStatus.UNAVAILABLE);
+        } else {
+            investimentProduct.setStatus(InvestimentProductStatus.AVAILABLE);
+        }
+
+        customerRepository.save(investimentProduct);
+    }
+
 
     public void deleteCustomer(InvestimentProduct customer){
         customerRepository.delete(customer);

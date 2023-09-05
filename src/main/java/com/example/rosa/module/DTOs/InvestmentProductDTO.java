@@ -15,4 +15,5 @@ public class InvestmentProductDTO {
     private double profitabilityRate;
     private int term;
     private double administrationTax;
+    private Integer expired;
 }
