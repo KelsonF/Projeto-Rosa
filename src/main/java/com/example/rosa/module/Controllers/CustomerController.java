@@ -28,33 +28,19 @@ public class CustomerController {
         return investmentProductService.getCustomerById(id);
     }
 
-    @GetMapping("/customer/create")
-    public String showForm(Model model){
-        InvestmentProductDTO investimentProduct = new InvestmentProductDTO();
-        model.addAttribute("investmentProduct", investimentProduct);
-
-        return "form";
-    }
-
     @PostMapping("/customer/create")
-    public String createNewCustomer(@ModelAttribute(value = "investmentProduct") InvestmentProductDTO investmentProduct){
+    public void createNewCustomer(@ModelAttribute(value = "investmentProduct") InvestmentProductDTO investmentProduct){
         investmentProductService.createNewCustomer(investmentProduct);
-
-        return "redirect:/customers";
     }
 
     @GetMapping("/customers/updateStatus/{id}")
-    public String updateStatus(@PathVariable String id){
+    public void updateStatus(@PathVariable String id){
         investmentProductService.changeProductStatus(id);
-
-        return "redirect:/customers";
     }
 
     @DeleteMapping("/customer/delete/{id}")
-    public String deleteCustomer( @PathVariable String id){
+    public void deleteCustomer( @PathVariable String id){
         InvestimentProduct customer = investmentProductService.getCustomerById(id);
         investmentProductService.deleteCustomer(customer);
-
-        return "redirect:/customers";
     }
 }
