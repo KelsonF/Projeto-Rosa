@@ -17,4 +17,4 @@ RUN ./gradlew bootJar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "build/libs/rosa-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "build/libs/Rosa-0.0.1-SNAPSHOT.jar"]
